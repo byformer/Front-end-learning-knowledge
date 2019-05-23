@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue实例</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div @click="handleClick">
+        {{ message }}
+      </div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          message: "hello vue"
+        },
+        methods: {
+          handleClick: function() {
+            alert("hello");
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          Vue实例 -> new Vue({}) -> 也称根实例，是一个页面的入口
+          实例API -> 比如：vm.$el、vm.$data、vm.$destroy() 等等
+          每个组件本质上都是一个实例
+       */
+    </script>
+  </body>
+</html>

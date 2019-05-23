@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue中同时使用过渡和动画</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css"
+    />
+  </head>
+  <style>
+    .v-leave-to {
+      opacity: 0;
+    }
+    .v-leave-active {
+      transition: opacity 3s;
+    }
+    .v-enter-active-enter {
+      opacity: 0;
+    }
+    .v-enter-active {
+      transition: opacity 3s;
+    }
+  </style>
+  <body>
+    <div id="root">
+      <transition
+        :duration="{enter:3000,leave:3000}"
+        appear
+        leave-active-class="animated shake fade-leave-active"
+        enter-active-class="animated swing fade-enter-active"
+        appear-active-class="animated swing"
+      >
+        <div v-if="show">hello vue</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          show: true
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show;
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          appear与appear-active-class -> 过渡和动画结合使用
+          :duration="{enter:3000,leave:3000}" -> 自定义入/出的动画时长
+       */
+    </script>
+  </body>
+</html>

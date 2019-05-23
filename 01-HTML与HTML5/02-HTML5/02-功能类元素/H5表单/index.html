@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>H5表单</title>
+  </head>
+  <body>
+    <!-- 
+      form表单属性:
+        action:表单提交地址
+        method:规发送表单数据的 HTTP 方法 - get | post
+        autocomplete:是否记住之前输入记录
+        target:规定在何处打开 action URL
+     -->
+    <!-- 
+      form表单内的元素:
+        <input>
+        <textarea>
+        <button>
+        <select>
+          <option>
+        <optgroup>
+        <fieldset>
+          <legend>
+        <label>
+    -->
+    <form name="form-one" action="" method="" autocomplete="on">
+      <!-- <fieldset> 标签可以将表单内的相关元素分组 -->
+      <fieldset>
+        <!-- <legend> 标签添加分组的名字 -->
+        <legend>表单区域</legend>
+
+        <!-- 颜色 -->
+        选择你喜欢的颜色: <input type="color" />
+        <br />
+
+        <!-- 日期 -->
+        日期1: <input type="date" /><br />
+        日期2: <input type="month" /><br />
+        日期3: <input type="week" /><br />
+        日期4: <input type="time" />
+        <br />
+
+        <!-- 邮件 -->
+        E-mail: <input type="email" />
+        <br />
+
+        <!-- 数字 -->
+        数量 ( 1 到 5 之间): <input type="number" min="1" max="5" />
+        <br />
+
+        <!-- URL -->
+        添加你的主页: <input type="url" />
+        <br />
+
+        <!-- 进度条 -->
+        <input type="range" />
+        <br />
+
+        <!-- autofocus属性:获取光标 -->
+        搜索框: <input type="search" autofocus />
+        <br />
+      </fieldset>
+    </form>
+  </body>
+</html>

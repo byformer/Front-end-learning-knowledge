@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      title元素:
+        定义了浏览器工具栏的标题
+        当网页添加到收藏夹时，显示在收藏夹中的标题
+        显示在搜索引擎结果页面的标题
+    -->
+    <title>头部</title>
+    <!-- 定义了基准链接及打开方式 -->
+    <base href="http://www.runoob.com/images/" target="_blank" />
+    <!-- 用于引入CSS -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- 
+      用于引入JS
+      其他属性：
+      defer：浏览器就会等到DOM加载完成后再执行脚本
+      async：asnyc可以保证脚本下载的同时，浏览器会继续渲染，一旦采用这个属性，就无法保证js的执行顺序。即，不能保证哪个js先下载，哪个后下载
+     -->
+    <script src="main.js"></script>
+    <!-- 当不支持JS时,需要显示的内容 -->
+    <noscript>您的浏览器不支持JS</noscript>
+    <!-- 
+      元信息:
+        charset属性：字符编码
+        name属性：keywords | description | author | ......
+        http-equiv属性：content-type | default-style | refresh | ......
+        content属性：定义与 http-equiv 或 name 属性相关的元信息
+    -->
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+    <meta name="description" content="免费在线教程" />
+    <meta name="author" content="runoob" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="refresh" content="3" />
+    <!-- n秒刷新页面 -->
+  </head>
+  <body></body>
+</html>

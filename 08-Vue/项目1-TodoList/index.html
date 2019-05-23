@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>项目-todoList</title>
+    <script src="js/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 主标题 -->
+      <div title="作者：吴晓斌" class="header">
+        <h1>搞事情</h1>
+      </div>
+
+      <!-- 副标题 -->
+      <div class="subheader">
+        <p>Todo List</p>
+      </div>
+
+      <!-- 输入框 -->
+      <div id="task">
+        <div class="wrap">
+          <input
+            class="task-input"
+            type="text"
+            placeholder="请输入您的任务..."
+            @keyup.enter="add"
+            v-model="current"
+          />
+          <button @click="remove_all_yes">清空所有已完成任务</button>
+        </div>
+      </div>
+
+      <!-- 待完成任务 -->
+      <div id="list_no">
+        <div class="wrap">
+          <div class="item" v-for="(todo_no, index) in list_no">
+            <button title="扔到已完成区" @click="complate(index)">
+              <i class="far fa-thumbs-up"></i>
+            </button>
+            <span>{{ index + 1 }}. {{ todo_no }}</span>
+            <button title="删除" class="btn-no" @click="remove_no(index)">
+              <i class="fas fa-skull-crossbones"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已完成任务 -->
+      <div id="list_yes">
+        <div class="wrap">
+          <div class="item" v-for="(todo_yes, index) in list_yes">
+            <button title="扔回待完成区" @click="change(index)">
+              <i class="far fa-hand-point-up"></i>
+            </button>
+            <span>{{ index + 1 }}. {{ todo_yes }}</span>
+            <button title="删除" class="btn-no" @click="remove_yes(index)">
+              <i class="fas fa-skull-crossbones"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 页脚 -->
+      <footer>
+        <p>
+          <i class="fas fa-user-astronaut"></i>
+          <span>吴晓斌</span>
+        </p>
+        <p>
+          <i class="fas fa-at"></i>
+          <span>845225263@qq.com</span>
+        </p>
+        <a href="https://github.com/wuxiaobin1995" target="_blank">
+          <i class="fas fa-hand-point-right"></i>
+          <span>个人GitHub</span>
+        </a>
+      </footer>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

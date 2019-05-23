@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>多媒体标签</title>
+  </head>
+  <body>
+    <!-- 音频 -->
+    <audio autoplay controls>
+      你的浏览器不支持该标签!
+      <source src="source/passion.mp3" type="audio/mpeg" />
+      <source src="#ogg" type="audio/ogg" />
+    </audio>
+
+    <!-- 视频 -->
+    <video controls>
+      你的浏览器不支持该标签!
+      <source src="source/pal4.mp4" type="video/mp4" />
+      <source src="#ogg" type="video/ogg" />
+    </video>
+
+    <!-- 画布 -->
+    <canvas></canvas>
+
+    <!-- 定义外部的可交互内容/插件,如flash -->
+    <!-- flash -->
+    <embed src="source/HappyBirthday.swf" />
+
+    <!-- 
+      多媒体标签出现的意义:
+        意味着富媒体的发展以及支持不使用插件(如flash)的情况下即可操作媒体文件,极大地提升了用户体验
+    -->
+  </body>
+</html>

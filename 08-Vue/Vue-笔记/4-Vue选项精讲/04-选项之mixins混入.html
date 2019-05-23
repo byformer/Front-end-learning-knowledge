@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>选项之mixins混入</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>选项之mixins混入</h1>
+    <div id="app">
+      {{ num }}
+      <div>
+        <button @click="add">点我</button>
+      </div>
+    </div>
+
+    <script>
+      // 2、全局混入 mixin
+      Vue.mixin({
+        updated: function() {
+          console.log(
+            "2、我是全局的混入mixin，数据发生变化，变为：" + this.num
+          );
+        }
+      });
+
+      // 3、局部混入 mixins
+      let addConsole = {
+        updated: function() {
+          console.log(
+            "3、我是局部的混入mixins，数据发生变化，变为：" + this.num
+          );
+        }
+      };
+
+      let app = new Vue({
+        el: "#app",
+        data: {
+          num: 1
+        },
+        // 1、构造器的methods
+        methods: {
+          add: function() {
+            console.log("1、我是构造器的methods");
+            this.num++;
+          }
+        },
+        // 局部混入mixins使用
+        mixins: [addConsole]
+      });
+
+      /*
+        Mixins一般有两种用途：
+          1、在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染
+          2、很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用
+
+        执行顺序：构造器的methods最先，全局混入mixin的第二，局部混入mixins第三
+
+        PS：当混入方法和构造器的methods方法重名时，混入的方法无法展现，也就是不起作用
+      */
+    </script>
+  </body>
+</html>

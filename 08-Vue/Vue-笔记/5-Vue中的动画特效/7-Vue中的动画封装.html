@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue中的动画封装</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <style>
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active {
+      transition: opacity 1s;
+    }
+  </style>
+  <body>
+    <div id="root">
+      <!-- 动画组件复用 -->
+      <fade :show="show">
+        <div>hello</div>
+      </fade>
+
+      <!-- 动画组件复用 -->
+      <fade :show="show">
+        <div>haha</div>
+      </fade>
+      <button @click="handleBtnClick">change</button>
+    </div>
+
+    <script>
+      Vue.component("fade", {
+        props: ["show"],
+        template: `
+          <transition>
+            <slot v-if="show"></slot>
+          </transition>`
+      });
+
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          show: true
+        },
+        methods: {
+          handleBtnClick: function() {
+            this.show = !this.show;
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          动画组件复用：其实就是封装成一个组件 + 插槽
+          你还可以使用第4节的js封装法，把所有的东西都放到组件内
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件传值校验和非props特性</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <child content="'hello vue'"></child>
+    </div>
+
+    <script>
+      Vue.component("child", {
+        // 传值校验
+        props: {
+          content: {
+            type: [String, Number], // 要求content必须是字符串或数字
+            required: false, // 必须要传content这个参数
+            default: "default value", // content的默认值
+            validator: function(value) {
+              return value.length > 5; // 长度必须大于5
+            }
+          }
+        },
+        template: `<div>{{content}}</div>`
+      });
+
+      var vm = new Vue({
+        el: "#root"
+      });
+
+      /* 
+        本节内容：
+          组件传值校验：父传子时，子组件应该对传过来的值进行校验，反过来也是
+          非props特性：也即子组件没有props来接收传过来的值，同时这个属性和值会显示在子组件的最外层元素当中（了解下即可，用得不多）
+       */
+    </script>
+  </body>
+</html>

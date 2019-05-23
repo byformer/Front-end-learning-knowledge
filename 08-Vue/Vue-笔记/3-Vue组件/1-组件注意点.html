@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件注意点</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- table注意点：H5规定tr是必须的，不能直接写row，此时使用is来解决 -->
+      <!-- <table>
+        <tbody>
+          <tr is="row"></tr>
+          <tr is="row"></tr>
+          <tr is="row"></tr>
+        </tbody>
+      </table> -->
+
+      <!-- ref获取普通元素的DOM -->
+      <div ref="A" @click="handleClick">hello vue</div>
+    </div>
+
+    <script>
+      Vue.component("row", {
+        template: `<tr><td>this is a row</td></tr>`
+      });
+
+      var vm = new Vue({
+        el: "#root",
+        methods: {
+          handleClick: function() {
+            alert(this.$refs.A);
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          table注意点：：H5规定tr是必须的，不能直接写row，此时使用is来解决
+            延申 -> 其他的如ul的li、select的option等，都可以使用is来解决
+          组件中，data必须是一个函数（因为组件会被调用很多次，我们希望每个组件都有独立的数据，不产生影响）
+          ref获取普通元素的DOM，ref获取组件的引用
+       */
+    </script>
+  </body>
+</html>

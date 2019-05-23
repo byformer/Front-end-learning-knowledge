@@ -1,0 +1,68 @@
+/* line 2, ../sass/reset.scss */
+html,
+body,
+div,
+span,
+object,
+button,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+a,
+code,
+em,
+img,
+q,
+small,
+strong,
+dd,
+dl,
+dt,
+li,
+ol,
+ul,
+fieldset,
+form,
+label,
+table,
+tbody,
+tr,
+th,
+td,
+input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* line 43, ../sass/reset.scss */
+body {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* line 48, ../sass/reset.scss */
+ul,
+li {
+  list-style-type: none;
+}
+
+/* line 52, ../sass/reset.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 56, ../sass/reset.scss */
+html {
+  background: #fff;
+  font-family: "STHeiti", "Microsoft YaHei", "Helvetica", "Arial", sans-serif;
+  -webkit-text-size-adjust: none;
+  word-break: break-word;
+}

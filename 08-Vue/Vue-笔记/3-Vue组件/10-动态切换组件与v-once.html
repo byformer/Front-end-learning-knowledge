@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>动态切换组件与v-once</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <component :is="type"></component>
+      <!-- <child-one v-if="this.type === 'child-one'"></child-one>
+      <child-two v-if="this.type === 'child-two'"></child-two> -->
+      <button @click="handleClick">change</button>
+    </div>
+
+    <script>
+      Vue.component("child-one", {
+        template: `<div v-once>child-one</div>`
+      });
+
+      Vue.component("child-two", {
+        template: `<div v-once>child-two</div>`
+      });
+
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          type: "child-one"
+        },
+        methods: {
+          handleClick: function() {
+            this.type === "child-one"
+              ? (this.type = "child-two")
+              : (this.type = "child-one");
+          }
+        }
+      });
+
+      /*
+        本节内容：
+          动态切换组件：<component :is="type"></component>
+            但是它每次切换都会先销毁不要的组件，再创建想要的组件，耗费内存
+            解决：使用v-once可以进行缓存，一般用于静态内容
+       */
+    </script>
+  </body>
+</html>

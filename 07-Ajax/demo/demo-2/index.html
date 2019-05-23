@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ajax实现局部更新</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+  </head>
+  <body>
+    <h1>jq实现ajax</h1>
+    <div>哈哈哈</div>
+    <button>获取数据</button>
+
+    <script>
+      $("button").click(function() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost/demo/demo-1/slider.json",
+          // data:'name=fox&age=18',//发送的数据
+          dataType: "json",
+          success: function(data) {
+            $("div").html(
+              "姓名：" + data.name + "<br />" + "年龄：" + data.age
+            );
+          },
+          beforeSend: function(argument) {}, // 在发送请求之前调用,可以做一些验证之类的处理
+          error: function(argument) {
+            console.log(argument);
+          } //请求失败调用
+        });
+      });
+    </script>
+  </body>
+</html>

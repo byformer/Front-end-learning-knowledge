@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue的条件渲染</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <div v-show="show">{{ message }}</div> -->
+      <!-- <div v-if="show">{{ message }}</div>
+      <div v-else>bye vue</div> -->
+
+      <!-- <div v-if="show_1 === 'a'">a</div>
+      <div v-else-if="show_1 === 'b'">b</div>
+      <div v-else>c</div> -->
+
+      <!-- Vue会尽量复用页面上的DOM，减少操作DOM的次数；使用key，则Vue就不会去复用，避免BUG -->
+      <div v-if="show">用户名：<input type="text" key="username" /></div>
+      <div v-else>邮箱名：<input type="text" key="password" /></div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          show: false
+          // message: "hello vue",
+          // show_1: "a"
+        }
+      });
+
+      /*
+        本节内容：
+          v-if -> 操作DOM
+          v-show -> 操作display
+          v-else、v-else-if -> 必须紧靠v-if才能生效
+          Vue会尽量复用页面上的DOM，减少操作DOM的次数；使用key，则Vue就不会去复用，避免一些BUG
+       */
+    </script>
+  </body>
+</html>

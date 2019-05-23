@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>父传子</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 动态：父组件app的data中的数据传给text -->
+      <ui-btn :text="A"></ui-btn>
+      <ui-btn :text="B"></ui-btn>
+      <ui-btn :text="C"></ui-btn>
+
+      <!-- 静态：text的值就是字符串"哈哈" -->
+      <ui-btn text="哈哈"></ui-btn>
+    </div>
+
+    <script>
+      Vue.component("ui-btn", {
+        // 创建 text 自定义属性
+        props: ["text"],
+        template: `<button>{{text}}</button>`
+      });
+
+      let app = new Vue({
+        el: "#app",
+        data: {
+          A: "a",
+          B: "b",
+          C: "c"
+        }
+      });
+
+      /* 
+        本节内容：
+          父组件可以使用 `props` 把数据传给子组件，分为动态和静态 2 种
+            注意：
+              1、子组件中更改普通类型的值，不会影响父组件的值
+              2、子组件中更改引用类型的值，父组件的值也会修改，其他同样引用了改值的子组件内部的值也会跟着被修改。（除非你有特殊的要求这么去做，否则最好不要这么做）
+            做法：你非得要操作值，可以先用data函数复制父组件传过来的值，再修改就比较安全了
+          
+          静态传值不常用，常用的还是动态传值(v-bind:...)
+
+          props的值最好不要有“-”，要写成小驼峰形式
+       */
+    </script>
+  </body>
+</html>

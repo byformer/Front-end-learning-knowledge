@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue的列表渲染</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 提高性能：key值可以使用这个唯一的id -->
+      <!-- <div v-for="(item, index) of list" :key="item.id">
+        {{ item.text }} --- {{ index }}
+      </div> -->
+
+      <!-- template模板，同时循环多个元素 -->
+      <!-- <template v-for="(item, index) of list">
+        <div>{{ item.text }} --- {{ index }}</div>
+        <span>
+          {{ item.text }}
+        </span>
+      </template> -->
+
+      <!-- 对象的循环 -->
+      <div v-for="(item, key, index) of userInfo">
+        {{ index }} --- {{ key }} --- {{ item }}
+      </div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        // 一般真实项目中，每条数据都有一个的唯一的id
+        data: {
+          // list: [
+          //   {
+          //     id: "001",
+          //     text: "hello"
+          //   },
+          //   {
+          //     id: "002",
+          //     text: "dell"
+          //   },
+          //   {
+          //     id: "003",
+          //     text: "lee"
+          //   }
+          // ],
+          userInfo: {
+            name: "dell",
+            age: 28,
+            gender: "mall",
+            salary: "secret"
+          }
+        }
+      });
+
+      /*
+        本节内容：
+          v-for="(item, index) of list" -> 建议用of代替in
+          提高性能：一般真实项目中，每条数据都有一个的唯一的id，此时key值就可以使用这个id
+
+          数组的循环：
+            1. 当你利用索引直接设置一个数组项时，vue不会为我们自动更新
+            2. 当你修改数组的长度时，vue不会为我们自动更新
+          常用的数组操作方法：push、pop、shift、unshift、splice、sort、reverse
+
+          template模板，同时循环多个元素（ps：template不支持key值）
+
+          对象的循环：
+            1. 直接往对象内部加值，vue不会为我们自动更新
+          
+          Vue.set全局方法就可以解决以上的问题：
+            对于数组：Vue.set(数组, 索引, 新值)，比如：Vue.set(vm.arr, 1, "哈哈")
+            对于对象：Vue.set(对象, 属性名, 新值)，比如：Vue.set(vm.userObj, "address", "beijing")
+          ps：
+            1、vm.$set() 这个API也可以达到效果
+            2、改变数组或对象的引用也可以达到效果
+       */
+    </script>
+  </body>
+</html>

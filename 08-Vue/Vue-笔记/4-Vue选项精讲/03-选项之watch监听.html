@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>选项之watch监听</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>选项之watch监听</h1>
+    <div id="app">
+      <p>今日的温度：{{ wendu }}℃</p>
+      <p>穿衣建议：{{ chuanyi }}</p>
+      <div>
+        <button @click="shenggao">升高温度</button>
+        <button @click="jiangwen">降低温度</button>
+      </div>
+    </div>
+
+    <script>
+      let chuanyi_arr = ["穿短袖", "夹克长裙", "羽绒服"];
+
+      let app = new Vue({
+        el: "#app",
+        data: {
+          wendu: 20,
+          chuanyi: "夹克长裙"
+        },
+        methods: {
+          shenggao: function() {
+            this.wendu++;
+          },
+          jiangwen: function() {
+            this.wendu--;
+          }
+        }
+        // 法一：内部写监听 watch
+        // watch: {
+        //   wendu: function(newVal, oldVal) {
+        //     if (newVal >= 26) {
+        //       this.chuanyi = chuanyi_arr[0];
+        //     } else if (newVal > 0 && newVal < 26) {
+        //       this.chuanyi = chuanyi_arr[1];
+        //     } else {
+        //       this.chuanyi = chuanyi_arr[2];
+        //     }
+        //   }
+        // }
+      });
+
+      // 法二：外部写监听 watch，好处就是降低我们程序的耦合度，使程序变的灵活
+      app.$watch("wendu", function(newVal, oldVal) {
+        if (newVal >= 26) {
+          this.chuanyi = chuanyi_arr[0];
+        } else if (newVal > 0 && newVal < 26) {
+          this.chuanyi = chuanyi_arr[1];
+        } else {
+          this.chuanyi = chuanyi_arr[2];
+        }
+      });
+
+      // 数据变化的监控经常使用，我们可以先来看一个简单的数据变化监控的例子。例如天气预报的穿衣指数，它主要是根据温度来进行提示的
+    </script>
+  </body>
+</html>

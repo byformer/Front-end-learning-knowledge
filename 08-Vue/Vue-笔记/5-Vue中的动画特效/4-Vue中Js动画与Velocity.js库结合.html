@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue中Js动画与Velocity.js库结合</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <transition
+        name="fade"
+        @before-enter="handleBeforeEnter"
+        @enter="handleEnter"
+        @after-enter="handleAfterEnter"
+      >
+        <div v-if="show">hello vue</div>
+      </transition>
+      <button @click="handleClick">toggle</button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          show: true
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show;
+          },
+          handleBeforeEnter: function(el) {
+            el.style.opacity = 0;
+          },
+          handleEnter: function(el, done) {
+            Velocity(el, { opacity: 1 }, { duarction: 1000, complete: done });
+          },
+          handleAfterEnter: function(el) {
+            alert("动画结束");
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          动画钩子
+            @before-enter 进入前
+            @enter 执行
+            @after-enter 执行后
+          Velocity的使用
+       */
+    </script>
+  </body>
+</html>

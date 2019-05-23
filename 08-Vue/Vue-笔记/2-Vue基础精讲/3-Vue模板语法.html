@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue模板语法</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      {{ name + "Lee" }}
+      <div v-text="name_1"></div>
+      <div v-html="name_2"></div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          name: "Dell",
+          name_1: "Dell",
+          name_2: "<h1>Dell</h1>"
+        }
+      });
+
+      /*
+        本节内容：
+          插值表达式（其中的一种模板语法） -> {{ }}，不识别html，原样输出
+          v-text="name"（其中的一种模板语法） -> 不识别html，原样输出
+          v-html="name"（其中的一种模板语法） -> 识别html，输出标签中的内容
+          在v-text="name_1"中，" "内的值其实是一个js表达式，可以做很多操作，比如：字符串连接、运算等
+       */
+    </script>
+  </body>
+</html>

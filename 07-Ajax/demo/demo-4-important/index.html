@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ajax注册-核心部分</title>
+    <meta name="description" content="ajax登陆注册" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <input type="text" id="user" placeholder="输入手机号" />
+    <p id="userWarn"></p>
+    <input type="password" id="pwd" placeholder="输入密码" />
+    <p id="pwdWarn"></p>
+    <button id="btn">注 册</button>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+    <script>
+      // 获取元素
+      var user = $("#user"),
+        userWarn = $("#userWarn"),
+        pwd = $("#pwd"),
+        pwdWarn = $("#pwdWarn"),
+        btn = $("#btn"),
+        userReg = /^1[3578]\d{9}$/,
+        pwdReg = /^\w{5,12}$/,
+        isRepeat = false;
+
+      // 绑定事件，用户名格式与重复性
+      user.blur(checkUser);
+      // 用户名格式与重复性-函数
+      function checkUser() {
+        userWarn.text("");
+        var userVal = user.val();
+        if (!userReg.test(userVal)) {
+          userWarn.text("用户名格式有误！");
+        } else {
+          $.ajax({
+            url:
+              "http://localhost/demo/demo-4-important/server/isUserRepeat.php",
+            dataType: "json", // 返回的数据类型
+            method: "POST",
+            data: { username: userVal },
+            success: function(data) {
+              if (data.code == 0) {
+                userWarn.text(data.msg);
+                isRepeat = true;
+              } else if (data.code == 2) {
+                userWarn.text(data.msg);
+                isRepeat = true;
+              } else if (data.code == 1) {
+                isRepeat = false;
+              }
+            },
+            error: function() {
+              userWarn.text("检测失败，请刷新重试...");
+            }
+          });
+        }
+      }
+
+      // 绑定事件，密码格式
+      pwd.blur(checkPwd);
+      // 密码格式-函数
+      function checkPwd() {
+        var pwdVal = pwd.val();
+        if (!pwdReg.test(pwdVal)) {
+          pwdWarn.text("密码格式有误！");
+        } else {
+          pwdWarn.text("");
+        }
+      }
+
+      // 绑定事件，注册
+      btn.click(register);
+      // 注册-函数
+      function register() {
+        userWarn.text("");
+        var userVal = user.val(),
+          pwdVal = pwd.val();
+        if (userReg.test(userVal) && pwdReg.test(pwdVal) && isRepeat == false) {
+          $.ajax({
+            url: "http://localhost/demo/demo-4-important/server/register.php",
+            dataType: "json", // 返回的数据类型
+            method: "POST",
+            data: { username: userVal, userpwd: pwdVal },
+            success: function(data) {
+              if (data.code == 0) {
+                userWarn.text(data.msg);
+                isRepeat = true;
+              } else if (data.code == 2) {
+                userWarn.text(data.msg);
+                isRepeat = true;
+              } else if (data.code == 1) {
+                alert("注册成功");
+                isRepeat = false;
+              }
+            },
+            error: function() {
+              alert("注册失败，请刷新重试...");
+            }
+          });
+        } else {
+          alert("注册失败！");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,461 @@
+/*
+  静态样式
+  
+  BEM 设计模式：
+    模块：以 “-” 连接
+    元素：层级关系，以双下划线 “__” 连接
+    修饰：某元素或某模块特别的状态，必须有一个状态名和状态值，以单下划线 “_” 连接
+*/
+
+/* 头部 */
+.header {
+  background-color: #f7f7f7;
+}
+
+/* 1200宽的容器 */
+.header__wrap {
+  width: 1200px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* logo */
+.header__logo {
+  width: 150px;
+  height: 38px;
+  line-height: 38px; /* line-height等于height，文本垂直居中 */
+  background: url("../img/logo.png") left center no-repeat; /* 水平left，垂直center，不重复 */
+  background-size: 38px 38px; /* 背景图像的尺寸 */
+  font-size: 20px; /* 字体大小 */
+  color: #07111b; /* 字体颜色 */
+  text-indent: 50px; /* 文本缩进50px */
+  /* 绝对定位，脱离文档流 */
+  position: absolute;
+  /* 盒子垂直居中 */
+  top: 50%;
+  margin-top: -19px;
+  left: 0;
+}
+/* 导航 */
+.header__nav {
+  height: 38px;
+  /* 绝对定位，脱离文档流 */
+  position: absolute;
+  /* 盒子垂直居中 */
+  top: 50%;
+  margin-top: -19px;
+  right: 0;
+}
+
+/* 导航item */
+.header__nav__item {
+  height: 38px;
+  line-height: 38px; /* line-height等于height，文本垂直居中 */
+  font-size: 14px; /* 字体大小 */
+  color: #292f35; /* 字体颜色 */
+  float: left; /* a标签变为inline-block */
+  margin: 0 20px; /* 让各个item有一定间距 */
+  position: relative;
+}
+/* 悬停触发，让字体变为红色，出现下横条 */
+.header__nav__item:hover {
+  color: #f01400;
+  border-bottom: 2px solid red;
+}
+/* 特殊按钮 */
+.header__nav__item_custom_button {
+  background: #000000;
+  color: #f4f4f5;
+  text-align: center; /* 文本水平居中 */
+  border-radius: 4px; /* 边框圆角 */
+  padding: 0 20px;
+}
+.header__nav__item_custom_button:hover {
+  border-bottom: 0 solid red;
+}
+
+/* 第一屏 */
+.screen-1 {
+  height: 800px;
+  background: url(../img/bg-screen-1.png) center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* 主标题 */
+.screen-1__heading {
+  opacity: 0;
+  font-size: 46px;
+  color: #4d555d;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 180px;
+}
+.screen-1__heading span {
+  font-size: 46px;
+  color: #f01400;
+}
+/* 手机图 */
+.screen-1__phone {
+  opacity: 0;
+  width: 1375px;
+  height: 305px;
+  background: url(../img/screen-1-phone.png) center center no-repeat;
+  /* 绝对定位，脱离文档流 */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  /* 盒子水平居中 */
+  left: 50%;
+  bottom: 30px; /* 距离容器底部的间距 */
+  z-index: 2; /* 比它的阴影更优先 */
+}
+/* 手机阴影图 */
+.screen-1__shadow {
+  opacity: 0;
+  width: 1240px;
+  height: 411px;
+  background: url(../img/screen-1-shadow.png) center center no-repeat;
+  /* 绝对定位，脱离文档流 */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  /* 盒子水平居中 */
+  left: 50%;
+  bottom: -200px; /* 距离容器底部的间距 */
+  z-index: 1;
+  opacity: 0.8; /* 透明度 */
+}
+
+/* 第二屏 */
+.screen-2 {
+  height: 800px;
+  background-color: #fafafa;
+  position: relative;
+}
+
+/* 主标题 */
+.screen-2__heading {
+  font-size: 46px;
+  color: #f01400;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 130px;
+}
+/* 副标题 */
+.screen-2__subheading {
+  font-size: 14px;
+  color: #2c3137;
+  line-height: 24px;
+  text-align: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 200px;
+}
+/* 手机图 */
+.screen-2__phone {
+  width: 930px;
+  height: 520px;
+  background: url(../img/screen-2-phone.png) center top no-repeat;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  bottom: -260px;
+}
+
+/* 特点1、2、3公共属性 */
+.screen-2__point {
+  height: 24px;
+  line-height: 24px;
+  font-size: 24px;
+  color: #4d555d;
+  position: absolute;
+}
+/* 特点1 */
+.screen-2__point_custom_left {
+  padding: 0 110px 0 0;
+  background: url(../img/icon-point-right.png) center right no-repeat;
+}
+/* 特点2、3 */
+.screen-2__point_custom_right {
+  padding: 0 0 0 110px;
+  background: url(../img/icon-point-left.png) center left no-repeat;
+}
+/* 3个特点的位置定位 */
+.screen-2__point_i_1 {
+  top: 150px;
+  left: -140px;
+}
+.screen-2__point_i_2 {
+  top: 30px;
+  right: 140px;
+}
+.screen-2__point_i_3 {
+  top: 330px;
+  right: 30px;
+}
+
+/* 第三屏 */
+.screen-3 {
+  height: 800px;
+  background: url(../img/bg-screen-3.png) center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* 1200宽的容器 */
+.screen-3__wrap {
+  width: 1200px;
+  height: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 主标题 */
+.screen-3__heading {
+  font-size: 46px;
+  color: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 90px;
+}
+/* 副标题 */
+.screen-3__subheading {
+  font-size: 14px;
+  line-height: 28px;
+  color: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 160px;
+}
+/* 手机图 */
+.screen-3__phone {
+  width: 750px;
+  height: 600px;
+  background: url(../img/screen-3-phone.png) center top no-repeat;
+  position: absolute;
+  right: 0;
+  top: 200px;
+}
+/* 手机参数 */
+.screen-3__features {
+  width: 320px;
+  height: 280px;
+  position: absolute;
+  top: 400px;
+  left: 0;
+}
+
+/* 参数1~4 */
+.screen-3__features__item {
+  width: 138px;
+  height: 118px;
+  border: 1px solid #cb7173;
+  color: #fff;
+  text-align: center;
+  margin: 10px;
+  /* 浮动，脱离文档流 */
+  float: left;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.screen-3__features__item__number {
+  height: 36px;
+  line-height: 36px;
+  font-size: 36px;
+  margin: 28px 0 8px 0;
+}
+.screen-3__features__item__desc {
+  height: 14px;
+  line-height: 14px;
+  font-size: 14px;
+}
+
+/* 第四屏 */
+.screen-4 {
+  height: 800px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+/* 1200宽的容器 */
+.screen-4__wrap {
+  width: 1200px;
+  height: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 主标题 */
+.screen-4__heading {
+  font-size: 46px;
+  color: #f01400;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 160px;
+}
+/* 副标题 */
+.screen-4__subheading {
+  font-size: 14px;
+  color: #464a4f;
+  text-align: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 230px;
+}
+/* 卡片组 */
+.screen-4__type {
+  width: 1260px;
+  height: 270px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 430px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen-4__type__item {
+  width: 220px;
+  height: 270px;
+  text-align: center;
+  background-size: cover;
+  position: relative;
+}
+.screen-4__type__item_i_1 {
+  background: url("../img/phone-1.png") left top no-repeat;
+}
+.screen-4__type__item_i_2 {
+  background: url("../img/phone-2.png") left top no-repeat;
+}
+.screen-4__type__item_i_3 {
+  background: url("../img/phone-3.png") left top no-repeat;
+}
+.screen-4__type__item_i_4 {
+  background: url("../img/phone-4.png") left top no-repeat;
+}
+
+.screen-4__type__item__color {
+  width: 100%;
+  height: 14px;
+  line-height: 14px;
+  font: 14px;
+  color: #2c3238;
+  position: absolute;
+  bottom: -44px;
+}
+.screen-4__type__item__storage {
+  width: 100%;
+  height: 12px;
+  line-height: 12px;
+  font: 12px;
+  color: #a4a9ae;
+  position: absolute;
+  bottom: -66px;
+}
+
+/* 第五屏 */
+.screen-5 {
+  height: 800px;
+  background-color: #d9dde1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 主标题 */
+.screen-5__heading {
+  font-size: 46px;
+  line-height: 46px;
+  color: #f01400;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 140px;
+}
+/* 副标题 */
+.screen-5__subheading {
+  font-size: 14px;
+  color: #2c3137;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 210px;
+}
+/* 图片 */
+.screen-5__bg {
+  width: 1920px;
+  height: 320px;
+  background: url(../img/bg-screen-5.png) center top no-repeat;
+  background-size: cover; /* 把背景图像扩展至最大尺寸 */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  bottom: -160px;
+}
+
+/* 第六屏 */
+.screen-6 {
+  height: 320px;
+  background: #2b333b url("../img/bg-screen-buy.png") center center no-repeat;
+  position: relative;
+}
+
+.screen-6__button {
+  width: 240px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  background-color: #f01414;
+  border-radius: 4px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+/* 页脚 */
+.footer {
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  background-color: #07111b;
+}
+
+/* 侧边栏 */
+.outline {
+  background-color: #fff;
+  box-shadow: 0px 4px 12px 0px rgba(7, 17, 27, 0.1);
+  /* 固定定位，脱离文档流 */
+  position: fixed;
+  padding: 5px 10px;
+  bottom: 150px;
+  right: -60px;
+}
+
+.outline__item {
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: rgb(255, 255, 255);
+  border-top: 1px solid #eee;
+  color: #93999f;
+  margin: 10px 0;
+  display: block;
+}
+.outline__item:first-child {
+  border: none;
+}
+.outline__item:hover,
+.outline__item_status_active {
+  color: #f00;
+}

@@ -1,0 +1,149 @@
+/* 公共样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 标题 */
+.header,
+.subheader {
+  text-align: center;
+}
+
+.header {
+  background: rgba(255, 165, 0, 0.8);
+}
+.header h1 {
+  padding: 6px 0;
+  font-size: 40px;
+  letter-spacing: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subheader {
+  padding: 22px;
+  font-size: 26px;
+  color: #555555;
+}
+
+/* 输入框 */
+.task-input {
+  width: 35%;
+  font-size: 22px;
+  padding: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: width 2s;
+}
+.task-input:focus {
+  width: 100%;
+}
+#task button {
+  background-color: rgba(255, 0, 0, 0.6);
+  border-radius: 12px;
+
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 4px 0;
+  text-align: center;
+  display: inline-block;
+  font-size: 8px;
+}
+
+/* 任务清单 */
+#list_no .wrap,
+#list_yes .wrap {
+  margin: 30px auto;
+  background: #cccccc;
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+}
+
+#list_no .wrap:hover,
+#list_yes .wrap:hover {
+  box-shadow: 4px 4px 10px #aaaaaa;
+}
+
+#list_no .item,
+#list_yes .item {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+#list_no span,
+#list_yes span {
+  word-break: break-all; /* 文本超出容器时，允许在单词内换行 */
+  flex-grow: 1;
+  font-size: 18px;
+  padding: 14px 0;
+  border-bottom: 2px solid rgba(27, 1, 6, 0.6);
+}
+
+#list_no button,
+#list_yes button {
+  font-size: 18px;
+  border: none;
+  margin: 10px;
+  background: #cccccc;
+  transition: transform 0.25s;
+}
+#list_no button:hover,
+#list_yes button:hover {
+  transform: scale(1.4, 1.4);
+}
+
+#list_yes span {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+/* 页脚 */
+footer {
+  position: fixed;
+  right: -175px;
+  top: 70px;
+  padding: 15px 15px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 30px;
+  background-color: rgba(76, 175, 80, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 20px 0 0 20px;
+  transition: box-shadow 1s, right 1.5s;
+}
+footer:hover {
+  box-shadow: 0 0 6px rgb(180, 31, 31);
+  right: 0;
+}
+footer span {
+  padding-left: 10px;
+}
+footer a span:hover {
+  color: #000000;
+}
+footer .fas {
+  color: #000000;
+}

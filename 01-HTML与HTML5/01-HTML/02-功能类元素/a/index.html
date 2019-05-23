@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>a元素</title>
+  </head>
+  <body>
+    <!-- 真链接 -->
+    <a href="https://www.baidu.com/" target="_blank" title="链接去百度"
+      >百度一下</a
+    >
+    <!-- 假链接 -->
+    <a href="#">跳转到当前页面的顶部</a>
+    <a href="">刷新页面</a>
+    <!-- 锚链接,还可跳转至指定页面的指定位置 -->
+    <a href="#PP">跳转至泰迪位置</a>
+    <p id="PP">我叫泰迪</p>
+    <!-- rel 属性用于指定当前文档与被链接文档的关系 -->
+    <a
+      href="http://www.runoob.com/tags/att-a-rel.html"
+      rel="nofollow"
+      target="_blank"
+      >点击查看rel属性的详细解析</a
+    >
+    <!-- target属性:规定在何处打开目标 URL -->
+    <a href="#" target="_self|_blank|_parent|_top|framename"></a>
+    <p>_self:默认,在当前框架中打开被链接文档</p>
+    <p>_blank:在新窗口中打开被链接文档</p>
+    <p>_parent:在父框架中打开被链接文档</p>
+    <p>_top:在整个窗口中打开被链接文档</p>
+    <p>framename:在指定的框架中打开被链接文档</p>
+    <!-- type属性:规定目标 URL 的类型 -->
+    <a href="https://www.bilibili.com/" type="text/html">B站</a>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue中CSS过渡原理</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <style>
+    /* name不写的话，默认是v，如：.v-enter*/
+    .fade-enter {
+      opacity: 0;
+    }
+    .fade-enter-active {
+      transition: opacity 1s; /* 从透明 -> 显示 */
+    }
+    .fade-leave-to {
+      opacity: 0.5;
+    }
+    .fade-leave-active {
+      transition: opacity 2s; /* 从显示 -> 透明 */
+    }
+  </style>
+  <body>
+    <div id="root">
+      <!-- name不写的话，默认是v -->
+      <transition name="fade">
+        <div v-if="show">hello vue</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          show: true
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show;
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          过渡：一定要在transition内部，本质就是增/删class类
+       */
+    </script>
+  </body>
+</html>

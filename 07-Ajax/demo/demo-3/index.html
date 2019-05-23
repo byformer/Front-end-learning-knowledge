@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JSONP跨域解决</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+  </head>
+  <body>
+    <h1>JSONP跨域解决</h1>
+    <button>获取数据</button>
+    <script>
+      $("button").click(function() {
+        $.getJSON(
+          "http://localhost/demo/demo-3/jsonp.php?jsoncallback=?",
+          function(data) {
+            alert("返回数据为：" + data);
+            console.log(data);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

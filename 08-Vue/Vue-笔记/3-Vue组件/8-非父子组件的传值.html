@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>非父子组件的传值</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 组件1 -->
+      <child content="Dell"></child>
+      <!-- 组件2 -->
+      <child content="Lee"></child>
+    </div>
+
+    <script>
+      // 观察者模式：总线机制bus
+      Vue.prototype.bus = new Vue();
+
+      Vue.component("child", {
+        props: {
+          content: {
+            type: String
+          }
+        },
+        // 不要改变父亲的content，用data函数复制一份父组件传过来的值，都用备份copyContent，就比较安全了
+        data: function() {
+          return { copyContent: this.content };
+        },
+        template: `<div @click="handleClick">{{copyContent}}</div>`,
+        methods: {
+          handleClick: function() {
+            this.bus.$emit("change", this.copyContent);
+          }
+        },
+        mounted: function() {
+          var this_ = this; // 改正this的作用域
+          // $on监听change这个事件
+          this.bus.$on("change", function(data) {
+            this_.copyContent = data;
+          });
+        }
+      });
+
+      var vm = new Vue({
+        el: "#root"
+      });
+
+      /*
+        本节内容：
+          观察者模式：总线机制 -> Vue.prototype.bus = new Vue();
+          后面建议使用：Vuex
+       */
+    </script>
+  </body>
+</html>

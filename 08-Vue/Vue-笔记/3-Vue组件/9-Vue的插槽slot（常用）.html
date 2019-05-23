@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue的插槽slot</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <body-content>
+        <div v-slot:"header">header</div>
+        <div v-slot:"footer">footer</div>
+      </body-content> -->
+
+      <child>
+        <!-- 作用域插槽：由父组件定义该怎么显示，一定要是template，v-slot:default="datas"是子组件中的数据 -->
+        <template v-slot:default="datas">
+          <li>{{ datas.item }}</li>
+        </template>
+      </child>
+    </div>
+
+    <script>
+      // Vue.component("body-content", {
+      //   template: `
+      //     <div>
+      //       <slot name="header">默认值</slot>
+      //       <div>content</div>
+      //       <slot name="footer">默认值</slot>
+      //     </div>`
+      // });
+
+      // 作用域插槽
+      Vue.component("child", {
+        data: function() {
+          return {
+            list: [1, 2, 3, 4]
+          };
+        },
+        template: `
+          <div>
+            <ul>
+              <slot v-for="item of list" :item=item></slot>
+            </ul>
+          </div>`
+      });
+
+      var vm = new Vue({
+        el: "#root"
+      });
+
+      /* 
+        本节内容：
+          插槽slot：子组件可以很方便地使用父组件传递的DOM
+            1、具名
+            2、默认值
+          作用域插槽：由父组件定义该怎么显示，一定要是template，v-slot:default="datas"是子组件中的数据
+       */
+    </script>
+  </body>
+</html>

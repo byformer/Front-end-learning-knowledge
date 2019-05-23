@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.extend扩展实例构造器</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>Vue.extend 扩展实例构造器/游离根组件</h1>
+
+    <!-- 法一 -->
+    <author></author>
+
+    <!-- 法二 -->
+    <!-- <div id="a"></div> -->
+
+    <script>
+      // 游离根组件
+      let A = Vue.extend({
+        props: ["b"],
+        template: `<p><a :href='authorURL'>{{authorName}} - {{b}}</a></p>`,
+        data: function() {
+          return {
+            authorName: "去百度",
+            authorURL: "https://www.baidu.com/"
+          };
+        }
+      });
+
+      // 进行挂载
+      new A({ propsData: { b: 1 } }).$mount("author"); /* 法一 */
+      // new author().$mount("#a"); /* 法二 */
+
+      // 我们想象一个需求，需求是这样的，要在博客页面多处显示作者的网名，并在网名上直接有链接地址。我们希望在html中只需要写<author></author>，这和自定义组件很像，但是他没有传递任何参数，只是个静态标签。
+      // 可用于弹出广告、咨询弹窗等
+      // 也可以通过id的方式挂载根组件
+
+      // propsData用在全局扩展时进行传递数据，当然，我们学了组件，完全可以使用组件来做。propsData在实际开发中我们使用的并不多，我们在后边会学到Vuex的应用，他的作用就是在单页应用中保持状态和数据的
+    </script>
+  </body>
+</html>

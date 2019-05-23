@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>版本七：简易计算器</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #eee;
+      }
+      #container {
+        text-align: center;
+        margin: 300px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <div id="container">
+      <p>
+        <input type="text" class="formerInput" value="1" />
+        <span class="sign">+</span>
+        <input type="text" class="laterInput" value="1" />
+        <span>=</span>
+        <span class="resultOutput">2</span>
+      </p>
+      <p>
+        <input type="button" value="+" class="btn" id="add" />
+        <input type="button" value="-" class="btn" id="subtract" />
+        <input type="button" value="×" class="btn" id="multiply" />
+        <input type="button" value="÷" class="btn" id="divide" />
+        <input type="button" value="%" class="btn" id="mod" />
+        <input type="button" value="^" class="btn" id="power" />
+        <input type="button" value="1/x" class="btn" id="invert" />
+        <input type="button" value="||" class="btn" id="absolute" />
+      </p>
+    </div>
+
+    <script>
+      /*
+        version：版本七
+        模块化：放到局部作用域，防止污染全局作用域，只暴露接口
+        实现：
+          闭包的运用，代码放到一个匿名函数中，并且直接调用 → (function(){代码...})();
+      */
+
+      // 获取元素：使用对象封装
+      var containerElem = {
+        container: document.querySelector("#container"),
+
+        formerInput: container.querySelector(".formerInput"),
+        sign: container.querySelector(".sign"),
+        laterInput: container.querySelector(".laterInput"),
+        resultOutput: container.querySelector(".resultOutput"),
+        btns: container.querySelectorAll(".btn")
+      };
+
+      // 模块
+      var operate = (function(params) {
+        // 封装遍历按钮函数，each就是一个回调函数，回调fn
+        function each(array, fn) {
+          for (var i = 0; i < array.length; i++) {
+            fn(array[i]);
+          }
+        }
+        // 调用遍历按钮函数，进行DOM2级事件绑定
+        each(containerElem.btns, function(btnElem) {
+          btnElem.addEventListener(
+            "click",
+            function() {
+              // this指向btnElem
+              updateSign(this.value);
+              outputResult(
+                operate(
+                  this.id,
+                  containerElem.formerInput.value,
+                  containerElem.laterInput.value
+                )
+              );
+            },
+            false
+          );
+        });
+
+        // 封装更新运算符号函数
+        function updateSign(symbol) {
+          containerElem.sign.innerHTML = symbol;
+        }
+
+        // 封装运算函数：可扩展新功能，但不可修改原本功能
+        var operation = {
+          add: function(num1, num2) {
+            return +num1 + +num2;
+          },
+          subtract: function(num1, num2) {
+            return num1 - num2;
+          },
+          multiply: function(num1, num2) {
+            return num1 * num2;
+          },
+          divide: function(num1, num2) {
+            return num1 / num2;
+          },
+          // 扩展新功能函数
+          createOperation: function(method, fn) {
+            if (!operation[method]) {
+              operation[method] = fn;
+            }
+          }
+        };
+
+        // 封装运算执行函数
+        function operate(method) {
+          if (!operation[method]) {
+            throw new Error("不存在名为" + method + "的运算方法！");
+          }
+          return operation[method].apply(
+            operation,
+            [].slice.call(arguments, 1, arguments.length)
+          );
+        }
+
+        // 封装输出结果函数
+        function outputResult(result) {
+          containerElem.resultOutput.innerHTML = result;
+        }
+
+        operate.createOperation = operation.createOperation;
+        return operate;
+      })();
+
+      // 扩展 取余、平方、倒数、绝对值 4个新功能
+      operate.createOperation("mod", function(num1, num2) {
+        return num1 % num2;
+      });
+      operate.createOperation("power", function(base, power) {
+        return Math.pow(base, power);
+      });
+      operate.createOperation("invert", function(num) {
+        return 1 / num;
+      });
+      operate.createOperation("absolute", function(num) {
+        return Math.abs(num);
+      });
+    </script>
+  </body>
+</html>

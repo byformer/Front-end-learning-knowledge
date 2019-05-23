@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue中使用Animate.css动画库</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css"
+    />
+  </head>
+  <!-- <style>
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .leave {
+      transform-origin: left center;
+      animation: bounce-in 1s reverse;
+    }
+    .active {
+      transform-origin: left center;
+      animation: bounce-in 1s;
+    }
+  </style> -->
+
+  <body>
+    <div id="root">
+      <!-- 名字可以自定义：enter-active-class="active"与leave-active-class="leave"-->
+      <transition
+        name="fade"
+        leave-active-class="animated shake"
+        enter-active-class="animated swing"
+      >
+        <div v-if="show">hello vue</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          show: true
+        },
+        methods: {
+          handleClick: function() {
+            this.show = !this.show
+          }
+        }
+      })
+
+      /* 
+        本节内容：
+          名字可以自定义：比如 enter-active-class="active"与leave-active-class="leave"
+          使用Animated库：enter-active-class="animated swing" 和 leave-active-class="animated shake"
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ajax实现局部更新</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+  </head>
+  <body>
+    <h1>ajax实现局部更新</h1>
+    <div>哈哈哈</div>
+    <button>获取数据</button>
+
+    <script>
+      $("button").click(function() {
+        // 【1】封装通用的xhr对象
+        function createXHR() {
+          if (window.XMLHttpRequest) {
+            return new XMLHttpRequest();
+          } else {
+            return new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        }
+        var xhr = createXHR();
+        // 【2】创建请求
+        xhr.open("GET", "http://localhost/demo/demo-1/slider.json");
+        // 【3】发送请求
+        xhr.send();
+        // 【4】注册onreadystatechange事件
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // 【5】获取返回的数据，并将字符串转为js数据类型
+            var datajson = JSON.parse(xhr.responseText);
+            $("div").html(
+              "姓名：" + datajson.name + "<br />" + "年龄：" + datajson.age
+            );
+          }
+        };
+      });
+    </script>
+  </body>
+</html>

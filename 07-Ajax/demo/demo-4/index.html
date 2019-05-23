@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>登陆注册</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div class="register">
+      <p class="title" id="title">
+        <span>登 录</span>
+        <span class="current">注 册</span>
+      </p>
+      <div class="form">
+        <div>
+          <span>+86</span>
+          <input
+            type="text"
+            name="user"
+            id="user"
+            placeholder="请输入注册手机号"
+            autocomplete="off"
+          />
+          <i id="user_icon"></i>
+          <p class="info" id="user_info"></p>
+        </div>
+        <div>
+          <input type="password" name="pwd" id="pwd" placeholder="请设置密码" />
+          <i id="pwd_icon"></i>
+          <p class="info" id="pwd_info"></p>
+        </div>
+        <p class="button">
+          <a href="javascript:void(0)" id="sigup-btn" class="btn show">注 册</a>
+          <a href="javascript:void(0)" id="login-btn" class="btn">登 录</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+    <script>
+      // 获取元素
+      $(document).ready(function() {
+        var user = $("#user"),
+          pwd = $("#pwd"),
+          sigup = $("#sigup-btn"),
+          login = $("#login-btn"),
+          titles = $("#title span"),
+          userIcon = $("#user_icon"),
+          userInfo = $("#user_info"),
+          pwdIcon = $("#pwd_icon"),
+          pwdInfo = $("#pwd_info"),
+          userReg = /^1[3578]\d{9}$/, // 用户正则表达式
+          pwdReg = /^\w{5,12}$/, // 密码正则表达式
+          isRepeat = false; // 记录用户名是否被占用
+
+        // 绑定事件，检测用户名的格式
+        user.blur(checkUser);
+        // 检测用户名的格式-函数
+        function checkUser() {
+          var userVal = user.val();
+          if (!userReg.test(userVal)) {
+            userIcon.attr("class", "no");
+            userInfo.text("手机号码格式有误！");
+            return false;
+          } else {
+            userIcon.attr("class", "ok");
+            userInfo.text("");
+            return true;
+          }
+        }
+
+        // 绑定事件，检测密码的格式
+        pwd.blur(checkPwd);
+        // 检测密码的格式-函数
+        function checkPwd() {
+          var pwdVal = pwd.val();
+          if (!pwdReg.test(pwdVal)) {
+            pwdIcon.attr("class", "no");
+            pwdInfo.text("请输入5到12位的字母、数字或下划线_");
+            return false;
+          } else {
+            pwdIcon.attr("class", "ok");
+            pwdInfo.text("");
+            return true;
+          }
+        }
+
+        // 绑定事件，检测用户名是否注册过
+        user.blur(checkUserRepeat);
+        // 检测用户名是否注册过-函数
+        function checkUserRepeat() {
+          var userVal = user.val();
+          checkUser();
+          var check_User = checkUser();
+          if (check_User == true) {
+            $.ajax({
+              url: "http://localhost/demo/demo-4/server/isUserRepeat.php",
+              method: "POST",
+              data: { username: userVal },
+              success: function(data) {
+                if (data.code == 0) {
+                  userIcon.attr("class", "no");
+                  userInfo.text(data.msg);
+                  isRepeat = true;
+                } else if (data.code == 1) {
+                  userIcon.attr("class", "ok");
+                  userInfo.text("");
+                  isRepeat = false;
+                } else if (data.code == 2) {
+                  userIcon.attr("class", "");
+                  userInfo.text(data.msg);
+                  isRepeat = true;
+                }
+              },
+              error: function() {
+                userInfo.text("检测失败，请重试...");
+              }
+            });
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        // 绑定事件，注册
+        sigup.click(register);
+        // 注册-函数
+        function register() {
+          checkUserRepeat();
+          checkPwd();
+          var check_UserRepeat = checkUserRepeat();
+          var check_Pwd = checkPwd();
+          var userVal = user.val(),
+            pwdVal = pwd.val();
+          // 完整无误
+          if (check_UserRepeat && check_Pwd && isRepeat === false) {
+            $.ajax({
+              url: "http://localhost/demo/demo-4/server/register.php",
+              method: "POST",
+              data: { username: userVal, userpwd: pwdVal },
+              success: function(data) {
+                if (data.code == 0) {
+                  userIcon.attr("class", "no");
+                  isRepeat = true;
+                  alert(data.msg);
+                } else if (data.code == 1) {
+                  userIcon.attr("class", "ok");
+                  isRepeat = false;
+                  alert(data.msg);
+                  showLogin(); // 跳至登录界面
+                  user.val("");
+                  pwd.val("");
+                } else if (data.code == 2) {
+                  userIcon.attr("class", "");
+                  isRepeat = true;
+                  alert(data.msg);
+                } else {
+                  userIcon.attr("class", "");
+                  userInfo.text("");
+                  isRepeat = true;
+                  alert("未知错误！");
+                }
+              },
+              error: function(data) {
+                alert(data.msg);
+              }
+            });
+          }
+        }
+
+        // 绑定事件，登录高亮
+        titles.eq(0).click(showLogin);
+        // 登录高亮-函数
+        function showLogin() {
+          // 载入登录界面，登录高亮显示
+          titles.eq(0).attr("class", "current");
+          titles.eq(1).attr("class", "");
+          login.attr("class", "show");
+          sigup.attr("class", "");
+        }
+
+        // 绑定事件，注册高亮
+        titles.eq(1).click(showSigup);
+        // 注册高亮-函数
+        function showSigup() {
+          // 载入注册界面，注册高亮显示
+          titles.eq(0).attr("class", "");
+          titles.eq(1).attr("class", "current");
+          login.attr("class", "");
+          sigup.attr("class", "show");
+        }
+      });
+    </script>
+  </body>
+</html>

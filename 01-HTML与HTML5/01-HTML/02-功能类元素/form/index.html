@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>表单</title>
+  </head>
+  <body>
+    <!-- 
+      form表单属性:
+        action:表单提交地址
+        method:规发送表单数据的 HTTP 方法 - get | post
+        autocomplete:是否记住之前输入记录
+        target:规定在何处打开 action URL
+     -->
+    <!-- 
+      form表单内的元素:
+        <input>
+        <textarea>
+        <button>
+        <select>
+          <option>
+        <optgroup>
+        <fieldset>
+          <legend>
+        <label>
+    -->
+    <form name="form-one" action="" method="" autocomplete="on">
+      <!-- <fieldset> 标签可以将表单内的相关元素分组 -->
+      <fieldset>
+        <!-- <legend> 标签添加分组的名字 -->
+        <legend>表单区域</legend>
+
+        <!-- <input> 标签规定了用户可以在其中输入数据的输入字段 -->
+        <label for="text-one">账号: <input id="text-one" type="text"/></label>
+        <br />
+
+        <!-- placeholder属性:底纹 -->
+        密码: <input type="password" placeholder="请输入密码" />
+        <br />
+
+        <!-- 按钮 -->
+        <input type="button" value="点我" onclick="alert('你还真点')" />
+        <br />
+
+        <!-- 单选框,name需一致 -->
+        男<input type="radio" name="性别" id="男性" value="male" /><br />
+        女<input type="radio" name="性别" id="女性" value="female" />
+        <br />
+
+        <!-- 
+          多选框,name需一致
+          checked属性:可以使选框默认选中
+         -->
+        <input type="checkbox" name="vehicle" value="Bike" checked />
+        我有一辆自行车<br />
+        <input type="checkbox" name="vehicle" value="Car" />
+        我有一辆小轿车<br />
+        <input type="checkbox" name="vehicle" value="Boat" /> 我有一艘船
+        <br />
+
+        <!-- 提交 -->
+        <input type="submit" value="提交按钮" />
+        <br />
+
+        <!-- 图像按钮,发送你所点击图像的 X 和 Y 坐标到服务端 -->
+        <input type="image" width="120px" src="a.jpg" alt="404" />
+        <br />
+
+        <!-- 文件上传 -->
+        <input type="file" />
+        <br />
+
+        <!-- 重置 -->
+        <input type="reset" value="重置按钮" />
+        <br />
+
+        <!-- 
+          下拉框
+          selected：默认选中
+         -->
+        <select>
+          <option value="Volvo">Volvo</option>
+          <option value="Saab">Saab</option>
+          <option value="Opel">Opel</option>
+          <option value="Audi" selected>Audi</option>
+        </select>
+        <br />
+
+        <!-- 多行文本框 -->
+        <textarea>多行文本框</textarea>
+        <br />
+
+        <!-- 普通按钮 -->
+        <button type="button">点我!</button>
+        <br />
+      </fieldset>
+    </form>
+  </body>
+</html>

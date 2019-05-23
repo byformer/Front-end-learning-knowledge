@@ -1,0 +1,35 @@
+/* top */
+.top {
+  background-color: #f3f5f7;
+}
+.top .container {
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  border-bottom: 1px solid #cdd0d4;
+}
+.top-left {
+  position: absolute;
+  left: 10px;
+  font-size: 12px;
+}
+.top-left-login,
+.top-left-signup,
+.top-left-mobile {
+  padding: 0 4px;
+}
+.top-right {
+  position: absolute;
+  right: 0;
+  font-size: 12px;
+}
+.top-right-item {
+  padding: 0 14px;
+}
+.top-right-item-up {
+  text-align: left;
+  background: url(../img/dropdown-arrow.png) no-repeat right center;
+}
+.top-right-item-down .item {
+  display: block;
+}

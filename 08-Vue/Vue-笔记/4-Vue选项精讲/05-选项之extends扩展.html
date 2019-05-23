@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>选项之extends扩展</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>选项之extends扩展</h1>
+    <div id="app">
+      ${ num }
+      <div>
+        <button @click="add">点我</button>
+      </div>
+    </div>
+
+    <script>
+      let extendsObj = {
+        updated: function() {
+          console.log("2、我是扩展局部extends");
+        },
+        methods: {
+          add: function() {
+            console.log("3、我是扩展extends中的methods");
+          }
+        }
+      };
+
+      let app = new Vue({
+        el: "#app",
+        data: {
+          num: 1
+        },
+        methods: {
+          add: function() {
+            console.log("1、我是构造器的methods");
+            this.num++;
+          }
+        },
+        extends: extendsObj,
+        // delimiters 变换插值形式，即把 {{}} 改为 ${  }
+        delimiters: ["${", "}"]
+      });
+
+      // 与mixins混入很相似
+      // PS：当扩展方法和构造器的methods方法重名时，扩展的方法无法展现，也就是不起作用
+    </script>
+  </body>
+</html>

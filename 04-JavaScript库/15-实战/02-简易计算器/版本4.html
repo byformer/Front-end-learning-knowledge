@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>版本四：简易计算器</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #eee;
+      }
+      #calculator {
+        text-align: center;
+        margin: 300px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <div id="calculator">
+      <p>
+        <input type="text" class="formerInput" value="1" />
+        <span class="sign">+</span>
+        <input type="text" class="laterInput" value="1" />
+        <span>=</span>
+        <span class="resultOutput">2</span>
+      </p>
+      <p>
+        <input type="button" value="+" class="btn" title="add" />
+        <input type="button" value="-" class="btn" title="subtract" />
+        <input type="button" value="×" class="btn" title="multiply" />
+        <input type="button" value="÷" class="btn" title="divide" />
+      </p>
+    </div>
+
+    <script>
+      /* 
+        version：版本四
+        函数封装，把细节封装起来
+      */
+
+      // 获取元素节点
+      var calculator = document.querySelector("#calculator");
+      var formerInput = calculator.querySelector(".formerInput");
+      var sign = calculator.querySelector(".sign");
+      var laterInput = calculator.querySelector(".laterInput");
+      var resultOutput = calculator.querySelector(".resultOutput");
+      // 获取按钮
+      var btns = calculator.querySelectorAll(".btn");
+
+      // 遍历按钮函数
+      function each(array, fn) {
+        for (var i = 0; i < array.length; i++) {
+          fn(array[i]);
+        }
+      }
+      // 调用遍历按钮函数，进行事件绑定
+      each(btns, function(elem) {
+        elem.onclick = function() {
+          // this指向elem
+          switch (this.title) {
+            case "add":
+              addHandler();
+              break;
+            case "subtract":
+              subtractHandler();
+              break;
+            case "multiply":
+              multiplyHandler();
+              break;
+            case "divide":
+              divideHandler();
+              break;
+          }
+        };
+      });
+
+      // 更新符号函数
+      function updateSign(symbol) {
+        sign.innerHTML = symbol;
+      }
+      // 运算函数
+      function add(num1, num2) {
+        return +num1 + +num2;
+      }
+      function subtrac(num1, num2) {
+        return num1 - num2;
+      }
+      function multiply(num1, num2) {
+        return num1 * num2;
+      }
+      function divide(num1, num2) {
+        return num1 / num2;
+      }
+      // 更改输出结果函数
+      function outputResult(result) {
+        resultOutput.innerHTML = result;
+      }
+
+      // 加
+      function addHandler() {
+        updateSign("+");
+        outputResult(add(formerInput.value, laterInput.value));
+      }
+      // 减
+      function subtractHandler() {
+        updateSign("-");
+        outputResult(subtrac(formerInput.value, laterInput.value));
+      }
+      // 乘
+      function multiplyHandler() {
+        updateSign("×");
+        outputResult(multiply(formerInput.value, laterInput.value));
+      }
+      // 除
+      function divideHandler() {
+        updateSign("÷");
+        outputResult(divide(formerInput.value, laterInput.value));
+      }
+    </script>
+  </body>
+</html>

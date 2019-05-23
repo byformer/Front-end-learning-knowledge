@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>7.2-Vue的列表渲染（Vue.set或vue.$set）</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>7.2-Vue的列表渲染（Vue.set或vue.$set）</h1>
+    <div id="app">
+      <ul>
+        <li v-for="item in arr">{{ item }}</li>
+      </ul>
+      <button @click="change">点我</button>
+    </div>
+
+    <script>
+      // 在构造器外部声明数据
+      let outData = {
+        arr: ["aaa", "bbb", "ccc"]
+      };
+
+      let app = new Vue({
+        el: "#app",
+        data: outData, // 引用外部数据
+        methods: {
+          change: function() {
+            Vue.set(app.arr, 1, "哈哈"); /* 可以改变arr且自动响应视图 */
+            // outData.arr[0] = "ddd"; /* 失效 */
+            // app.arr[0] = "ddd"; /* 失效 */
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

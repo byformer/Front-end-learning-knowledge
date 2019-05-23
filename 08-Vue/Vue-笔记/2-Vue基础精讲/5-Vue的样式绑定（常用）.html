@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue的样式绑定</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <style>
+      .activated {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 通过class的对象绑定 -->
+      <!-- <div @click="handleDivClick" :class="{activated: isActivated}">
+        hello vue
+      </div> -->
+
+      <!-- 通过class的数组绑定，其内容是多个变量 -->
+      <!-- <div @click="handleDivClick" :class="[activated, activatedOne]">
+        hello vue
+      </div> -->
+
+      <!-- 通过style的对象绑定 -->
+      <!-- <div @click="handleDivClick" :style="styleObj">
+        hello vue
+      </div> -->
+
+      <!-- 通过style的数组绑定 -->
+      <!-- <div @click="handleDivClick" :style="[styleObj, {fontSize:'40px'}]">
+        hello vue
+      </div> -->
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          // isActivated: false，
+          // activated: "",
+          // activatedOne: "activated-one",
+          // styleObj: {
+          //   color: "black"
+          // }
+        },
+        methods: {
+          handleDivClick: function() {
+            // this.isActivated = !this.isActivated; // 取反操作，很常用
+            // this.activated
+            //   ? (this.activated = "")
+            //   : (this.activated = "activated");
+            // this.styleObj.color === "black"
+            //   ? (this.styleObj.color = "red")
+            //   : (this.styleObj.color = "black");
+          }
+        }
+      });
+
+      /*
+        本节内容：
+         Vue的样式绑定 ->
+          1、添加class类
+            1、通过class的对象绑定（判断布尔值，控制class类的添加与否）
+            2、通过class的数组绑定，其内容是多个变量（即class类）
+          2、内联style
+            1、通过style的对象绑定
+            2、通过style的数组绑定
+
+          注意：CSS的"-"只能用小驼峰代替，比如 font-size:'40px' -> fontSize:'40px' 才能生效
+       */
+    </script>
+  </body>
+</html>

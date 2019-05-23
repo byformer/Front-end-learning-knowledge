@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件化-todolist</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="inputValue" />
+      <button @click="handleBtnClick">提交</button>
+      <ul>
+        <todo
+          v-for="(item, index) in list"
+          :content="item"
+          :listindex="index"
+          @delete="handleItemDelete"
+        ></todo>
+      </ul>
+    </div>
+
+    <script>
+      /* 法一：全局组件 */
+      // Vue.component("todo", {
+      //   props: ["content", "listindex"],
+      //   template: `<li @click="handleItemClick">{{content}}</li>`,
+      //   methods: {
+      //     handleItemClick: function() {
+      //       this.$emit("delete", this.listindex);
+      //     }
+      //   }
+      // });
+
+      /* 法二：局部组件 */
+      var todoTemplate = {
+        props: ["content", "listindex"],
+        template: `<li @click="handleItemClick">{{content}}</li>`,
+        methods: {
+          handleItemClick: function() {
+            this.$emit("delete", this.listindex);
+          }
+        }
+      };
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          list: [],
+          inputValue: ""
+        },
+        methods: {
+          handleBtnClick: function() {
+            this.list.push(this.inputValue);
+            this.inputValue = "";
+          },
+          handleItemDelete: function(index) {
+            this.list.splice(index, 1);
+          }
+        },
+        /* 引入局部组件 */
+        components: {
+          todo: todoTemplate
+        }
+      });
+
+      /*
+        本节内容：
+          MVVM模式 -> 数据驱动
+          使用组件 -> 全局组件、局部组件
+          父传子 -> props: ["content", "listindex"]
+          子传父 -> this.$emit("delete", this.listindex)
+      */
+    </script>
+  </body>
+</html>

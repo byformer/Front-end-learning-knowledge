@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>子传父</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button-counter @father-increment="incrementTotal"></button-counter>
+      <p>{{ total }}</p>
+    </div>
+
+    <script>
+      // 子组件button-counter
+      Vue.component("button-counter", {
+        template: '<button @click="increment">点赞👍</button>', // 【1】点击事件 click
+        methods: {
+          // 【2】调用子组件 button-counter 的事件句柄
+          increment: function() {
+            this.$emit("father-increment", [1, "A"]); // 【3】触发父组件 app 的自定义事件 father-increment，并把 [1, "A"] 这个数组以父组件事件句柄incrementTotal的参数，来传给父组件
+          }
+        }
+      });
+
+      // 父组件app
+      new Vue({
+        el: "#app",
+        data: {
+          total: 0
+        },
+        methods: {
+          // 【4】调用父组件 app 的事件句柄
+          incrementTotal: function(data) {
+            this.total += 1;
+            console.log(data); // 结果就是子组件传过来的那个 [1, "A"] 数组
+          }
+        }
+      });
+
+      /* 
+        本节内容：
+          解析：
+            注册了一个组件 button-counter，然后这个组件在 app 组件里面被调用了，所以 button-counter 是 app 的子组件
+            父组件 app 通过 v-on:自定义事件='事件句柄' 绑定一个事件句柄，当子组件 this.$emit('xxxx'，[data]) 被调用时触发这个'事件句柄'
+          总结：
+            通过$emit事件：子组件事件click → 子组件事件句柄increment → 父组件father-increment + 传出一个数组 → 父组件事件句柄incrementTotal + 接收那个数组
+       */
+    </script>
+  </body>
+</html>

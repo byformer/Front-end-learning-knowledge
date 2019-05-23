@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>template模板</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <h1>template模板</h1>
+    <div id="app">
+      {{ messge }}
+    </div>
+
+    <!-- 法一 -->
+    <!-- <template id="dd2">
+      <h2 style="color:red">我是template标签模板</h2>
+    </template> -->
+
+    <!-- 法二 -->
+    <!-- <script type="x-template" id="dd3">
+      <h2 style="color:red">我是script模板</h2>
+    </script> -->
+
+    <script>
+      let app = new Vue({
+        el: "#app",
+        data: {
+          messge: "Hello Vue"
+        },
+        // template: "#dd2" /* 法一 */
+        // template: "#dd3" /* 法二 */
+        template: `<h2 style="color:red">我是模板</h2>` /* 法三 */
+      });
+
+      // 法一：写在template标签里的模板，这种写法更像是在写HTML代码
+      // 法二：写到script中，这种写模板的方法，可以让模板文件从外部引入
+      // 法三：直接写到template中这种写法比较直观，但是如果模板html代码太多，不建议这么写
+      // 法四：以后学习到vue-cli的时候还会学到一种xxx.vue的写法
+    </script>
+  </body>
+</html>

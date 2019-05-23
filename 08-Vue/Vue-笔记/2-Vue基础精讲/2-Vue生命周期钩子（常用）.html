@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue生命周期钩子</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">hello vue</div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        template: `<div>{{test}}</div>`,
+        data: {
+          test: "hello vue"
+        },
+        beforeCreate: function() {
+          console.log(
+            "beforeCreate：组件实例刚被创建，组件属性计算之前，如data属性"
+          );
+        },
+        created: function() {
+          console.log(
+            "created：组件实例创建完成，属性已绑定，但DOM还未生成，$el属性还不存在"
+          );
+          console.log(this.$el); // 结果：undefined
+        },
+        beforeMount: function() {
+          console.log("beforeMount：模板挂载之前");
+          console.log(this.$el); // 结果：<div id="root">hello vue</div>
+        },
+        mounted: function() {
+          console.log("mounted：模板挂载之后");
+        },
+        beforeUpdate: function() {
+          console.log("beforeUpdate：组件更新前");
+        },
+        updated: function() {
+          console.log("updated：组件更新后");
+        },
+        beforeDestroy: function() {
+          console.log("beforeDestroy：组件销毁前调用");
+        },
+        destroyed: function() {
+          console.log("destroyed：组件销毁后调用");
+        }
+      });
+
+      /*
+        本节内容：
+          生命周期钩子 -> Vue实例在某一个时间点会自动执行的函数
+          常用的 8 个生命周期钩子 -> 牢记于心，总共11个；它们不放在methods中
+       */
+    </script>
+  </body>
+</html>

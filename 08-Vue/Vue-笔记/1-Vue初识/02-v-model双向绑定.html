@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>v-model双向绑定</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 输入框 -->
+      <h3>输入框</h3>
+      <input type="text" v-model="message" />
+      <p>请输入：{{ message }}</p>
+      <textarea v-model="message">{{ message }}</textarea>
+
+      <hr />
+
+      <!-- 传入isTrue中，用户的输入只有true或false两种：可用于判断用户是否勾选 -->
+      <h3>真/假</h3>
+      <input type="checkbox" v-model="isTrue" />
+      <span>{{ isTrue }}</span>
+
+      <hr />
+
+      <!-- 选中的value值传入web_names数组中：可用于判断用户的多项选择 -->
+      <h3>多选</h3>
+      选项1：<input type="checkbox" value="1" v-model="web_names" />
+      选项2：<input type="checkbox" value="2" v-model="web_names" />
+      选项3：<input type="checkbox" value="3" v-model="web_names" />
+      <p>{{ web_names }}</p>
+
+      <hr />
+
+      <!-- 选中的value值传给ones：可用于判断用户的单项选择 -->
+      <h3>单选</h3>
+      选项1：<input type="radio" value="1" v-model="ones" /> 选项2：<input
+        type="radio"
+        value="2"
+        v-model="ones"
+      />
+      选项3：<input type="radio" value="3" v-model="ones" />
+      <p>{{ ones }}</p>
+    </div>
+
+    <script>
+      let app = new Vue({
+        el: "#app",
+        data: {
+          message: "",
+          isTrue: false,
+          web_names: [],
+          ones: ""
+        }
+      });
+
+      // .lazy：取代 imput 监听 change 事件
+      // .number：输入字符串转为数字
+      // .trim：输入去掉首尾空格
+    </script>
+  </body>
+</html>

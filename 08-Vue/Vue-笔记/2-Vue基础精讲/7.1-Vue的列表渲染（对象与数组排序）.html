@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>7.1-Vue的列表渲染（对象与数组排序）</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>数组排序</h1>
+      <ul>
+        <li v-for="(item, index) in sortItems">{{ index }} - {{ item }}</li>
+      </ul>
+
+      <hr />
+
+      <h1>对象排序</h1>
+      <ul>
+        <li v-for="student in sortStudents">
+          {{ student.name }} - {{ student.age }}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      let app = new Vue({
+        el: "#app",
+        data: {
+          items: [20, 23, 18, 65, 32, 19, 54, 56, 41, 7, 8],
+          students: [
+            { name: "jspang", age: 32 },
+            { name: "Panda", age: 30 },
+            { name: "PanPaN", age: 21 },
+            { name: "King", age: 45 }
+          ]
+        },
+        computed: {
+          sortItems: function() {
+            return this.items.sort(sortNumber);
+          },
+          sortStudents: function() {
+            return sortByKey(this.students, "age");
+          }
+        }
+      });
+
+      // 普通数组排序（工作可用）
+      function sortNumber(a, b) {
+        return a - b;
+      }
+      // 数组的对象排序：即数组的值是一个个的对象（工作可用）
+      function sortByKey(array, key) {
+        return array.sort(function(a, b) {
+          var x = a[key];
+          var y = b[key];
+          return x < y ? -1 : x > y ? 1 : 0;
+        });
+      }
+
+      /*
+        本节内容：
+          普通数组排序（工作可用）
+          数组的对象排序：即数组的值是一个个的对象（工作可用）
+       */
+    </script>
+  </body>
+</html>

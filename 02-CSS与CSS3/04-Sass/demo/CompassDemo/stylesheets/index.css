@@ -1,0 +1,179 @@
+@charset "UTF-8";
+/* line 2, ../sass/reset.scss */
+html,
+body,
+div,
+span,
+object,
+button,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+a,
+code,
+em,
+img,
+q,
+small,
+strong,
+dd,
+dl,
+dt,
+li,
+ol,
+ul,
+fieldset,
+form,
+label,
+table,
+tbody,
+tr,
+th,
+td,
+input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* line 43, ../sass/reset.scss */
+body {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* line 48, ../sass/reset.scss */
+ul,
+li {
+  list-style-type: none;
+}
+
+/* line 52, ../sass/reset.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 56, ../sass/reset.scss */
+html {
+  background: #fff;
+  font-family: "STHeiti", "Microsoft YaHei", "Helvetica", "Arial", sans-serif;
+  -webkit-text-size-adjust: none;
+  word-break: break-word;
+}
+
+/* 样式重置表 */
+/* 多于2行用省略号代替 */
+/* 清除浮动 */
+/* 头部 */
+/* line 38, ../sass/index.scss */
+.header {
+  height: 45px;
+  background-color: #d43d3d;
+}
+/* line 41, ../sass/index.scss */
+.header .title_logo {
+  width: 100px;
+  height: 100%;
+  margin: 0 auto;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../img/wap_logo@3x_581de69e.png);
+}
+
+/* 导航 */
+/* line 55, ../sass/index.scss */
+.top_bar {
+  background-color: #f4f5f6;
+  height: 36px;
+  overflow-x: auto;
+  /* 横向滚动条 */
+  overflow-y: hidden;
+}
+/* line 60, ../sass/index.scss */
+.top_bar .top_menu_list {
+  white-space: nowrap;
+  overflow: hidden;
+  height: 100%;
+  display: inline-block;
+}
+/* line 65, ../sass/index.scss */
+.top_bar .top_menu_list .btn {
+  padding: 8px;
+  display: inline-block;
+  font-size: 17px;
+}
+/* line 69, ../sass/index.scss */
+.top_bar .top_menu_list .btn.cur {
+  color: #d43d3d;
+}
+
+/* 内容区 */
+/* line 77, ../sass/index.scss */
+.content_list {
+  /* 文字模板 */
+  /* 图片模板 */
+}
+/* line 79, ../sass/index.scss */
+.content_list .section_item, .content_list .image_item {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.6);
+}
+/* line 81, ../sass/index.scss */
+.content_list .section_item .title, .content_list .image_item .title {
+  font-size: 20px;
+}
+/* line 84, ../sass/index.scss */
+.content_list .section_item .item_info, .content_list .image_item .item_info {
+  color: #999999;
+  padding-top: 12px;
+  font-size: 14px;
+}
+/* line 88, ../sass/index.scss */
+.content_list .section_item .item_info .active, .content_list .image_item .item_info .active {
+  font-size: 14px;
+  color: #d43d3d;
+  border: 1px solid #d43d3d;
+}
+/* line 96, ../sass/index.scss */
+.content_list .image_item .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* 多于2行用省略号代替 */
+}
+/* line 99, ../sass/index.scss */
+.content_list .image_item .list_image {
+  padding-top: 10px;
+  /* 清除浮动 */
+}
+/* line 30, ../sass/index.scss */
+.content_list .image_item .list_image::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/* line 102, ../sass/index.scss */
+.content_list .image_item .list_image .list_img_holder {
+  float: left;
+  width: 33.33%;
+}
+/* line 105, ../sass/index.scss */
+.content_list .image_item .list_image .list_img_holder img {
+  border: none;
+  width: 100%;
+}
+/* line 111, ../sass/index.scss */
+.content_list .image_item .list_image .list_img_big img {
+  width: 100%;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>版本六：简易计算器</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #eee;
+      }
+      #container {
+        text-align: center;
+        margin: 300px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <div id="container">
+      <p>
+        <input type="text" class="formerInput" value="1" />
+        <span class="sign">+</span>
+        <input type="text" class="laterInput" value="1" />
+        <span>=</span>
+        <span class="resultOutput">2</span>
+      </p>
+      <p>
+        <input type="button" value="+" class="btn" title="add" />
+        <input type="button" value="-" class="btn" title="subtract" />
+        <input type="button" value="×" class="btn" title="multiply" />
+        <input type="button" value="÷" class="btn" title="divide" />
+        <input type="button" value="%" class="btn" title="mod" />
+        <input type="button" value="^" class="btn" title="power" />
+      </p>
+    </div>
+
+    <script>
+      /* 
+        version：版本六
+        开放和封闭原则 —— 对扩展开放，对修改封闭 
+      */
+
+      // 获取元素：使用对象封装
+      var containerElem = {
+        container: document.querySelector("#container"),
+
+        formerInput: container.querySelector(".formerInput"),
+        sign: container.querySelector(".sign"),
+        laterInput: container.querySelector(".laterInput"),
+        resultOutput: container.querySelector(".resultOutput"),
+        btns: container.querySelectorAll(".btn")
+      };
+
+      // 封装遍历按钮函数
+      function each(array, fn) {
+        for (var i = 0; i < array.length; i++) {
+          fn(array[i]);
+        }
+      }
+      // 调用遍历按钮函数，进行事件绑定
+      each(containerElem.btns, function(btnElem) {
+        btnElem.onclick = function() {
+          // this指向btnElem
+          updateSign(this.value);
+          outputResult(
+            operate(
+              this.title,
+              containerElem.formerInput.value,
+              containerElem.laterInput.value
+            )
+          );
+        };
+      });
+
+      // 封装更新运算符号函数
+      function updateSign(symbol) {
+        containerElem.sign.innerHTML = symbol;
+      }
+
+      // 封装运算函数：可扩展新功能，但不可修改原本功能
+      var operation = {
+        add: function(num1, num2) {
+          return +num1 + +num2;
+        },
+        subtract: function(num1, num2) {
+          return num1 - num2;
+        },
+        multiply: function(num1, num2) {
+          return num1 * num2;
+        },
+        divide: function(num1, num2) {
+          return num1 / num2;
+        },
+        // 扩展新功能函数
+        createOperation: function(name, fn) {
+          if (!this[name]) {
+            this[name] = fn;
+          }
+        }
+      };
+      // 扩展 % 和 ^ 2个新功能
+      operation.createOperation("mod", function(num1, num2) {
+        return num1 % num2;
+      });
+      operation.createOperation("power", function(base, power) {
+        return Math.pow(base, power);
+      });
+      // 封装运算执行函数
+      function operate(method, num1, num2) {
+        if (!operation[method]) {
+          throw new Error("不存在名为" + method + "的运算方法！");
+        }
+        return operation[method](num1, num2);
+      }
+
+      // 封装输出结果函数
+      function outputResult(result) {
+        containerElem.resultOutput.innerHTML = result;
+      }
+    </script>
+  </body>
+</html>

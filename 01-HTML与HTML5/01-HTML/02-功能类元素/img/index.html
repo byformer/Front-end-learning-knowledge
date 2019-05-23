@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>img | map | area</title>
+  </head>
+  <body>
+    <!-- 
+      从技术上讲，图像并不会插入 HTML 页面中，而是链接到 HTML 页面上。<img> 标签的作用是为被引用的图像创建占位符.
+      <map> 标签用于客户端图像映射。图像映射是指带有可点击区域的一幅图像.
+      <area> 标签定义图像映射内部的区域（图像映射指的是带有可点击区域的图像）.
+      参考:http://www.runoob.com/try/try.php?filename=tryhtml_areamap
+     -->
+    <img src="a.jpg" alt="图片加载失败时显示的文本" usemap="#planetmap" />
+    <map id="planetmap" name="planetmap">
+      <area shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm" />
+      <area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm" />
+      <area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm" />
+    </map>
+    <!-- 
+      图片格式：
+        JPEG 高压缩比，通常后缀为.jpg或.jpeg
+        GIF 可做动图，通常后缀为.gif
+        PNG 带有不透明度通道，通常后缀为.png
+        SVG 矢量图形，通常后缀为.svg
+     -->
+  </body>
+</html>

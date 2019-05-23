@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue计算属性-方法-监听器</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      {{ fullName }}
+      {{ age }}
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          firstName: "Dell",
+          lastName: "Lee",
+          // fullName: "Dell Lee",
+          age: 24
+        },
+        computed: {
+          fullName: {
+            get: function() {
+              console.log("我会缓存，相关响应式依赖发生改变时，我才会重新计算");
+              return this.firstName + " " + this.lastName;
+            },
+            set: function(value) {
+              var arr = value.split(" ");
+              this.firstName = arr[0];
+              this.lastName = arr[1];
+              console.log("我来改变fullName的值");
+            }
+          }
+        }
+        // methods: {
+        //   fullName: function() {
+        //     console.log("我不会缓存，每当触发重新渲染时，我就会重新计算");
+        //     return this.firstName + " " + this.lastName;
+        //   }
+        // },
+        // watch: {
+        //   firstName: function() {
+        //     this.fullName = this.firstName + " " + this.lastName;
+        //     console.log("firstName监听了一次");
+        //   },
+        //   lastName: function() {
+        //     this.fullName = this.firstName + " " + this.lastName;
+        //     console.log("lastName监听了一次");
+        //   }
+        // }
+      });
+
+      /*
+        本节内容：
+          计算属性computed ->
+            1、可以对原数据进行改造输出，比如：格式编辑，大小写转换，顺序重排，添加符号……
+            2、会进行缓存，只在相关响应式依赖发生改变时它们才会重新求值
+            3、get和set
+          函数methods ->
+            1、不会进行缓存，每当触发重新渲染时，我就会重新计算
+          监听器watch ->
+            1、会进行缓存，只在相关响应式依赖发生改变时它们才会重新求值
+       */
+    </script>
+  </body>
+</html>

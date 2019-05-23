@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>其他标签</title>
+  </head>
+  <body>
+    <!-- 标记文本,黄色 -->
+    <p>妈妈叫我买一瓶<mark>牛奶</mark></p>
+
+    <!-- 定义一些输出类型,计算表单结果配合oninput事件 -->
+    <form
+      oninput="totalPrice.value=parseInt(price.value)*parseInt(number.value)"
+    >
+      <input type="text" id="price" value="5000" />*
+      <input type="number" id="number" value="3" />=
+      <output name="totalPrice" for="price number"></output>
+    </form>
+  </body>
+</html>
